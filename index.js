@@ -68,7 +68,7 @@ function erase() {
 async function loadModel() {    
     model = await tf.loadLayersModel('https://raw.githubusercontent.com/Mabaka/mnst/master/mnst.json');
     
-    model.predict(tf.zeros([1, 28, 28, 1]))
+    model.predict(tf.zeros([1, 28, 28,1]))
     
     return model
 }
@@ -83,11 +83,10 @@ async function predictModel() {
     
     image = tf.browser.fromPixels(imageData)
 
-    image = tf.image.resizeBilinear(image, [28, 28]).sum(2).expandDims(0).expandDims(-1)
-
+    image = tf.image.resizeBilinear(image, [28, 28]).sum(2).expandDims(0).expandDims(-1)    
     y = model.predict(image);
 
-    document.getElementById('result').innerHTML = "Prediction: " + y.argMax(1).dataSync();
+    document.getElementById('result').innerHTML = "Предсказание: " + y.argMax(1).dataSync();
 }
 
 var model = loadModel()
